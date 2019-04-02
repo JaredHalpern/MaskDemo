@@ -6,15 +6,17 @@ import PlaygroundSupport
 class InvertedMaskLabel: UILabel {
     
     override func drawText(in rect: CGRect) {
-        
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        
-        CGContext.saveGState(context)
+
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+
+        context.saveGState()
         UIColor.white.setFill()
         UIRectFill(rect) // fill bounds w/opaque color
         context.setBlendMode(.clear)
         super.drawText(in: rect) // draw text using clear blend mode, ie: set *all* channels to 0
-        CGContext.restoreGState(context)
+        context.restoreGState()
     }
 }
 
